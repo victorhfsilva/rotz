@@ -2,12 +2,6 @@
 
 ![Rotz](./img/rayders.png)
 
-<div align="center">
-
-![last commit](https://img.shields.io/github/last-commit/tyto-sec/rotz) ![created](https://img.shields.io/github/created-at/tyto-sec/rotz) ![language](https://img.shields.io/github/languages/top/tyto-sec/rotz) ![stars](https://img.shields.io/github/stars/tyto-sec/rotz)
-
-</div>
-
 > **Rotz** is a modular recon and vulnerability automation framework that chains subdomain discovery, DNS analysis, live probing, content enumeration, JavaScript analysis, fuzzing, and vulnerability filtering into a reproducible workflow.
 
 <br>
