@@ -14,5 +14,6 @@ services:
       - ./output:/app/output
       - ./gf:/app/gf
       - ./scripts:/app/scripts
+      - ./recon.py:/app/recon.py:ro
     command: ["-w", "/app/workflows/main.yaml"]
     restart: on-failure

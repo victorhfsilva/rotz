@@ -19,8 +19,69 @@
 
 <br>
 
+## Recon CLI (`recon.py`)
+
+`recon.py` is a didactic, single-command orchestrator. It accepts one domain or a
+domain list and runs the most relevant stages, reusing the scripts in
+`workflows/*/src` as building blocks.
+
+```bash
+chmod +x recon.py
+
+# one domain
+./recon.py -d example.com
+
+# several domains and a deeper preset
+./recon.py -d example.com -d example.com.br --preset deep --screenshots both
+
+# scope from a file, bounded content enumeration
+./recon.py -dL scope.txt -n client --max-hosts 50 --stages subdomains,probe,content,javascript
+
+# passive, no brute force
+./recon.py -d example.com --passive
+
+# what is available in this environment?
+./recon.py --check -d example.com
+
+# what does each stage do?
+./recon.py --explain
+```
+
+Stages: `subdomains`, `asn`, `dns`, `infra`, `probe`, `content`, `javascript`,
+`fuzz`, `vulns`. Presets: `passive`, `web` (default), `deep`, `full`,
+`subdomains`.
+
+Useful options:
+
+| Option | Purpose |
+|---|---|
+| `-d/--domain`, `-dL/--domains-file` | target domain(s) |
+| `--stages`, `--preset`, `--exclude-stage` | pipeline selection |
+| `--passive`, `--no-bruteforce` | avoid active enumeration |
+| `--scope`, `--exclude`, `--no-scope-filter` | scope control |
+| `--max-hosts` | cap hosts used by content/JS/fuzzing |
+| `--threads`, `--timeout`, `--retries` | httpx tuning |
+| `-H/--header`, `--cookie`, `--user-agent` | authenticated probes |
+| `--screenshots`, `--js-download`, `--js-nuclei` | content/JS options |
+| `--ports`, `--top-ports`, `--rate-limit` | port scanning |
+| `--wordlist-subdomains`, `--wordlist-dirs`, `--resolvers` | wordlists/resolvers |
+| `--gf-patterns`, `--dalfox` | vulnerability triage |
+| `--resume`, `--dry-run`, `--check` | operational control |
+
+Each target is written to `<output>/<target>/` with subdomains, DNS, IPs,
+URLs, JavaScript, fuzzing and vulnerability buckets. The run always ends with:
+
+- `_recon/summary.md` — funnel counts, technologies, status codes, interesting
+  subdomains, open ports, gf classes, DNS/SPF issues and next steps.
+- `_recon/summary.json` — the same data in machine-readable form.
+- `_recon/inventory.jsonl` — httpx fingerprint records.
+- `_recon/recon.log` — every command and its output.
+
+<br>
+
 ## Repository Structure
 
+- `recon.py`: didactic CLI orchestrator (domain or domain-list input)
 - `workflows/`: task pipelines (subdomains, dns, content, javascript, fuzzing, vulns)
 - `config/`: tool configs (subfinder, puredns, notify, gf patterns)
 - `input/`: target scope inputs

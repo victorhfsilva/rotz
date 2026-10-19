@@ -21,6 +21,8 @@ COPY config/puredns/resolvers.txt /root/.config/puredns/resolvers.txt
 
 WORKDIR /app
 
+COPY recon.py /app/recon.py
+
 VOLUME ["/app/output", "/app/input", "/app/workflows", "/app/wordlists", "/app/gf", "/app/scripts"]
 
 CMD ["/bin/bash"]

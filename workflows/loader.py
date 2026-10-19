@@ -1,3 +1,8 @@
+"""Gera um workflow Rayder a partir de respostas interativas.
+
+Para o orquestrador didatico por dominio/lista, use ../recon.py.
+"""
+
 import os
 import sys
 import json

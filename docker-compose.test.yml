@@ -16,6 +16,7 @@ services:
       - ./output:/app/output
       - ./gf:/app/gf
       - ./scripts:/app/scripts
+      - ./recon.py:/app/recon.py:ro
     stdin_open: true
     tty: true
     command: /bin/bash
